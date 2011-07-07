@@ -32,6 +32,7 @@
 
 #+BEGIN_EXAMPLE
    cat bookstore.xml | ./xawk.py -e '{ print sum(//price); }'
+#+END_EXAMPLE
 
 ** Grammar
 #+BEGIN_EXAMPLE
