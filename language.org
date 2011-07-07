@@ -15,20 +15,26 @@
     treats them as xpaths from the current node. With " quoted args
     treat as strings and print.
 
-** Example
+** Examples
    Make a new document containing only the links from the input.
 
-#+begin_src xawk
+#+BEGIN_EXAMPLE
    / {
-     print "<html><head><title>" /html/head/title "</title></head><body><ul>";
+     print "<html><head><title>" html/head/title "</title></head><body><ul>";
      [//a {
        print "<li>" .;
      }]
-     print "</body></html>"
+     print "</ul></body></html>"
    }
-#+end_src
+#+END_EXAMPLE
+
+   Get the sum of all the price nodes in a document:
+
+#+BEGIN_EXAMPLE
+   cat bookstore.xml | ./xawk.py -e '{ print sum(//price); }'
 
 ** Grammar
+#+BEGIN_EXAMPLE
    program := matcher+.
    matcher := xpath_actions | actions | xpath_default.
    xpath_actions := xpath actions.
@@ -39,3 +45,4 @@
    command := "print".
    arg := xpath | string.
    string := "\"" /([^"]|\\")*/ "\"".
+#+END_EXAMPLE
