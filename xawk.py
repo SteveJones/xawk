@@ -22,12 +22,16 @@ class Parser(xawk_lang.xawk):
     def xpath_string(self, xpath):
         def func(node):
             matches = node.xpath(xpath)
-            matches = [match
-                       if isinstance(match, basestring)
-                       else module.tostring(match)
-                       for match
-                       in matches]
-            return u"".join(matches)
+            try:
+                matches = [match
+                           if isinstance(match, basestring)
+                           else module.tostring(match)
+                           for match
+                           in matches]
+                return u"".join(matches)
+            except TypeError: # not an iterable match result
+                return unicode(matches)
+
         return func
 
     def command_evaluator(self, command, args):
