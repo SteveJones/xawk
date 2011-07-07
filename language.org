@@ -11,12 +11,14 @@
   action. i.e. [matchers]
 
   Some actions:
-  - print :: With no args prints the current node. With unquoted args
-             treats them as xpaths from the current node. With "
-             quoted args treat as strings and print.
+  - print ::With no args prints the current node. With unquoted args
+    treats them as xpaths from the current node. With " quoted args
+    treat as strings and print.
 
 ** Example
    Make a new document containing only the links from the input.
+
+#+begin_src xawk
    / {
      print "<html><head><title>" /html/head/title "</title></head><body><ul>";
      [//a {
@@ -24,6 +26,7 @@
      }]
      print "</body></html>"
    }
+#+end_src
 
 ** Grammar
    program := matcher+.
