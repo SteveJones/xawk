@@ -1,0 +1,7 @@
+//html {
+  print "<html><head><title>" html/head/title/text() "</title></head><body><ul>";
+  [//a {
+    print "<li>" .;
+  }]
+  print "</ul></body></html>";
+}

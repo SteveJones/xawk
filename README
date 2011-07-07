@@ -1,0 +1,11 @@
+xawk: awk for xml
+hawk: awk for html
+
+(you need to run yapps xawk_grammar.g before running the programs (you
+might need to apt-get install yapps2 before you do that))
+
+Both accept a language that looks a bit like awk. Very limited so far
+but try:
+
+curl www.bbc.co.uk | ./hawk links.xawk | lynx -stdin
+

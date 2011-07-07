@@ -1,0 +1,38 @@
+* Awk like
+  <xpath> { actions }
+
+  Default action is print the whole match.
+
+  Break from awk in that actions are executed in order.
+
+  Action without an xpath is always evaluated.
+
+  Because XML is a tree, actions can be nested with the special match
+  action. i.e. [matchers]
+
+  Some actions:
+  - print :: With no args prints the current node. With unquoted args
+             treats them as xpaths from the current node. With "
+             quoted args treat as strings and print.
+
+** Example
+   Make a new document containing only the links from the input.
+   / {
+     print "<html><head><title>" /html/head/title "</title></head><body><ul>";
+     [//a {
+       print "<li>" .;
+     }]
+     print "</body></html>"
+   }
+
+** Grammar
+   program := matcher+.
+   matcher := xpath_actions | actions | xpath_default.
+   xpath_actions := xpath actions.
+   xpath_default := xpath ";".
+   xpath := /[^{]\S*/.
+   actions := "{" action+ "}".
+   action := command arg+ ";" | "[" matcher+ "]".
+   command := "print".
+   arg := xpath | string.
+   string := "\"" /([^"]|\\")*/ "\"".

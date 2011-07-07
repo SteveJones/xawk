@@ -1,0 +1,5 @@
+//book {
+  print "Book:";
+  print "  Title: " title/text();
+  print "  Author: " author/text();
+}
